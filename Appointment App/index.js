@@ -27,6 +27,7 @@
 
 //  }
 
+var id;
 function result() {
     var nameValue = document.getElementById("name").value;
     var emailValue = document.getElementById("emailID").value;
@@ -56,20 +57,39 @@ function result() {
 
     // windowData(userData)
 // PoST DATA CRUD CRUD
-    axios.post('https://crudcrud.com/api/8c92d1ba838242d9b476ed877fe23d83/AppData', userData)
-    .then((response)=>{
-        console.log(response);
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
-    getData();
+    if(!id){
+        axios.post('https://crudcrud.com/api/5a7f71ff391342919058d31aad52da6a/AppData', userData)
+        .then((response)=>{
+            console.log(response);
+            location.reload();
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
+
+    if(id){
+        axios.put('https://crudcrud.com/api/5a7f71ff391342919058d31aad52da6a/AppData/'+id, userData)
+        .then((response)=>{
+            console.log("Success")
+            id = '';
+            location.reload();
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    }
+
+
+    // 
 }
 
 // getData From CRUDCRUD API
+
 getData();
 function getData(){
-    axios.get('https://crudcrud.com/api/8c92d1ba838242d9b476ed877fe23d83/AppData')
+    axios.get('https://crudcrud.com/api/5a7f71ff391342919058d31aad52da6a/AppData')
     .then((response)=>{
         for(let i = 0; i < response.data.length; i++){
             windowData(response.data[i]);
@@ -97,11 +117,12 @@ function windowData(userData){
     
 
     Editbtn.onclick = () =>{
-        document.getElementById('name').value = userData.name;
-        document.getElementById('emailID').value = userData.emailID;
-        document.getElementById('mobile').value = userData.mobile;
-        document.getElementById('date').value = userData.date;
-        document.getElementById('time').value = userData.time;
+        id = userData._id;
+        document.getElementById('name').value = userData.nameValue;
+        document.getElementById('emailID').value = userData.emailValue;
+        document.getElementById('mobile').value = userData.numberValue;
+        document.getElementById('date').value = userData.dateValue;
+        document.getElementById('time').value = userData.timeValue;
         localStorage.removeItem(userData.emailID);
         myTable.removeChild(tableData);
         
@@ -115,7 +136,7 @@ function windowData(userData){
         // localStorage.removeItem(userData.emailID);
         // myTable.removeChild(tableData);
         axios
-        .delete('https://crudcrud.com/api/8c92d1ba838242d9b476ed877fe23d83/AppData/'+userData._id)
+        .delete('https://crudcrud.com/api/5a7f71ff391342919058d31aad52da6a/AppData/'+userData._id)
         .then((response)=>{
             myTable.removeChild(tableData);
         })
