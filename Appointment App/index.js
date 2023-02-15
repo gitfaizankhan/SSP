@@ -109,10 +109,19 @@ function windowData(userData){
     const btn = document.createElement('input');
     btn.type = 'button';
     btn.value = 'delete';
+
+    // Delete USER DATA
     btn.onclick = () =>{
-        localStorage.removeItem(userData.emailID);
-        myTable.removeChild(tableData);
-        
+        // localStorage.removeItem(userData.emailID);
+        // myTable.removeChild(tableData);
+        axios
+        .delete('https://crudcrud.com/api/8c92d1ba838242d9b476ed877fe23d83/AppData/'+userData._id)
+        .then((response)=>{
+            myTable.removeChild(tableData);
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
     }
 
     
