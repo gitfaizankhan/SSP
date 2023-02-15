@@ -54,6 +54,8 @@ function result() {
     // let GetUserInfo = localStorage.getItem("userData");
     // let UserInfo = JSON.parse(localStorage.getItem("userData"));
 
+    // windowData(userData)
+// PoST DATA CRUD CRUD
     axios.post('https://crudcrud.com/api/8c92d1ba838242d9b476ed877fe23d83/AppData', userData)
     .then((response)=>{
         console.log(response);
@@ -61,25 +63,37 @@ function result() {
     .catch((err)=>{
         console.log(err);
     })
+    getData();
+}
 
-
-    windowData(userData);
+// getData From CRUDCRUD API
+getData();
+function getData(){
+    axios.get('https://crudcrud.com/api/8c92d1ba838242d9b476ed877fe23d83/AppData')
+    .then((response)=>{
+        for(let i = 0; i < response.data.length; i++){
+            windowData(response.data[i]);
+        }
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
 }
 
 
 function windowData(userData){
     const myTable = document.getElementById('dataTable');
     const tableData = document.createElement('li');
-    tableData.textContent = userData.name +" "+ userData.emailID+" "+userData.mobile+" "+userData.date+" "+userData.time;
+    tableData.textContent = userData.nameValue +" "+ userData.emailValue+" "+userData.numberValue+" "+userData.dateValue+" "+userData.timeValue;
 
     const Editbtn = document.createElement('input');
     Editbtn.type = 'button';
     Editbtn.value = 'edit';
 
     var keys = Object.keys(userData);
-    keys.forEach(element => {
-        document.getElementById(element).value = '';
-    });
+    // keys.forEach(element => {
+    //     document.getElementById(element).value = '';
+    // });
     
 
     Editbtn.onclick = () =>{
