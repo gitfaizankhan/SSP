@@ -23,6 +23,8 @@ function addExpence(expence){
     let ul = document.getElementById("items");
     let li = document.createElement('li');
     li.className = "list-group-item";
+
+    // create new text node using the createTextNode() method and appends it to the li element using the appendChild method.
     li.appendChild(document.createTextNode(`Amount = ${expence.amount}, Discriptiton = ${expence.discriptiton}, Expence = ${expence.category}`));
     
     //Edit button
@@ -51,8 +53,14 @@ function addExpence(expence){
     li.append(deleteB);
     ul.append(li);
 }
+
+// get an array of all the keys stored in the localStorage object during page loading first time
 Object.keys(localStorage).forEach((key) => {
+
+    // retrieve the string value stored under the current key
     stringifiedDetailsOfExpence = localStorage.getItem(key);
+
+    // convert into a JavaScript object
     detailsOfExpence = JSON.parse(stringifiedDetailsOfExpence);    
     addExpence(detailsOfExpence);
 });

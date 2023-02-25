@@ -10,11 +10,13 @@
 </head>
     <body class="bg-success">
         <div class="container py-3 h-100">
+<!-- create a row element that centers its child elements both horizontally and vertically on the page and has a height of its parent element -->
             <div class="row justify-content-center align-items-center h-40">
                 <div class="col-12 col-lg-5 col-xl-5">
-                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card shadow-none" style="border-radius: 15px;">
                         <div class="card-body p-md-2">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5" style="text-align: center;">Expenses Tracker</h3>
+                            <!-- Form Start -->
                             <form action="#" id="my-form">
                             <div class="row">
                                 <div class="mb-4">
@@ -45,10 +47,12 @@
                                 <input class=" form-control btn btn-primary btn-lg" type="submit" value="Submit" />
                             </div>
                         </form>
+                        <!-- Form End -->
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Data View Model Start-->
         <div class="container py-3 h-100">
             <div class="row justify-content-center align-items-center h-40">
                 <div class="col-12 col-lg-5 col-xl-5">
@@ -65,6 +69,7 @@
                 </div>
             </div>
         </div>
+        <!-- Data View Model End -->
         <script src="index.js"></script>
     </body>
 </html>
