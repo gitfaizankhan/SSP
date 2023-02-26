@@ -18,7 +18,7 @@ async function sellData(){
             productname,
             category
         }
-        let response = await axios.post('https://crudcrud.com/api/ad04ac078ebc4d6b9901af19d427f49a/AppData', sellerData);
+        let response = await axios.post('https://crudcrud.com/api/293edc4f95ac4593abc2fb50e169a658/AppData', sellerData);
         windowData(response.data);
         location.reload();  
     }catch(error){
@@ -31,7 +31,7 @@ getData();
 
 async function getData(){
     try{
-        let sellerSell = await axios.get('https://crudcrud.com/api/ad04ac078ebc4d6b9901af19d427f49a/AppData');
+        let sellerSell = await axios.get('https://crudcrud.com/api/293edc4f95ac4593abc2fb50e169a658/AppData');
         // console.log(sellerSell);
         for(let data of sellerSell.data){
             windowData(data);
@@ -53,7 +53,7 @@ function windowData(response){
     // Delete USER DATA
     btn.onclick =  async () =>{
         try{
-            let deleteData = await axios.delete('https://crudcrud.com/api/ad04ac078ebc4d6b9901af19d427f49a/AppData/'+response._id);
+            let deleteData = await axios.delete('https://crudcrud.com/api/293edc4f95ac4593abc2fb50e169a658/AppData/'+response._id);
             if(deleteData.status == 200){
                 location.reload();
             }
