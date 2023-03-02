@@ -6,12 +6,14 @@ const app = express();
 
 const adminRoute = require('./route/login');
 const shopRoute = require('./route/message');
+const contactRoute = require('./route/contactus')
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(adminRoute);
 app.use(shopRoute);
+app.use(contactRoute);
 
 // 404 Page
 
