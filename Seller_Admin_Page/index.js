@@ -20,7 +20,6 @@ async function sellData(){
         }
         let response = await axios.post('https://crudcrud.com/api/293edc4f95ac4593abc2fb50e169a658/AppData', sellerData);
         windowData(response.data);
-        location.reload();  
     }catch(error){
         document.getElementById('error').innerHTML = `${error.message}`;
     }
@@ -32,7 +31,6 @@ getData();
 async function getData(){
     try{
         let sellerSell = await axios.get('https://crudcrud.com/api/293edc4f95ac4593abc2fb50e169a658/AppData');
-        // console.log(sellerSell);
         for(let data of sellerSell.data){
             windowData(data);
         }
@@ -54,10 +52,7 @@ function windowData(response){
     btn.onclick =  async () =>{
         try{
             let deleteData = await axios.delete('https://crudcrud.com/api/293edc4f95ac4593abc2fb50e169a658/AppData/'+response._id);
-            if(deleteData.status == 200){
-                location.reload();
-            }
-        
+            tableData.remove();
         }catch(error){
             console.log(error);
         }
