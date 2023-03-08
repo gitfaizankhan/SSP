@@ -18,6 +18,7 @@ async function sellData(){
             productname,
             category
         }
+        
         let response = await axios.post('https://crudcrud.com/api/293edc4f95ac4593abc2fb50e169a658/AppData', sellerData);
         windowData(response.data);
     }catch(error){
