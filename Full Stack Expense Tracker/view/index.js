@@ -1,21 +1,19 @@
-async function addUserData() {
-    // console.log("SELLER DATA ", sellerData);
+async function addExpense() {
     try {
         let amount = document.getElementById('amount').value;
         let discriptiton = document.getElementById('discriptiton').value;
         let category = document.getElementById('category').value;
         let id = document.getElementById('id').value;
-        let sellerData = {
+        let expenseData = {
             id: id,
             expenseAmount: amount,
             expenseDesc: discriptiton,
             expenseCate: category
         }
-        console.log("SELLER DATA ", sellerData);
         if (id === '') {
-            await axios.post('http://localhost:5000/expense/add-expense', sellerData);
+            await axios.post('http://localhost:5000/expense/add-expense', expenseData);
         } else {
-            await axios.post('http://localhost:5000/expense/update-expense/' + sellerData.id, sellerData);
+            await axios.post('http://localhost:5000/expense/update-expense/' + expenseData.id, expenseData);
         }
     } catch (error) {
         console.log(error);
