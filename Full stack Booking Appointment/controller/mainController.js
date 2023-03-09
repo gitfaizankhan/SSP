@@ -1,4 +1,3 @@
-const express = require('express');
 const Data = require('../model/userData');
 
 

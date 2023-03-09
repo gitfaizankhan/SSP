@@ -1,7 +1,8 @@
 const express = require('express');
+const mainController = require('../controller/mainController');
 
 const router = express.Router();
-const mainController = require('../controller/mainController');
+
 
 // get data
 
