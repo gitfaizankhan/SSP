@@ -1,64 +1,50 @@
 const dataModel = require('../model/dataModel');
 
 
-exports.getExpense = (req, res, next)=>{
-    dataModel.findAll()
-    .then(data=>{
+exports.getExpense = async (req, res, next)=>{
+    try{
+        let data = await dataModel.findAll();
         res.json(data);
-    })
-    .catch(error=>{
-        console.log(error);
-    });
+    }catch(err){
+        console.log(err)
+    };
 }
 
 
 
-exports.addExpense = (req, res, next)=>{
+exports.addExpense = async (req, res, next)=>{
     const expenseAmount = req.body.expenseAmount;
     const expenseDesc = req.body.expenseDesc;
     const expenseCate = req.body.expenseCate;
-    console.log("Called");
-    dataModel.create({
+    let result = await dataModel.create({
         expenseAmount: expenseAmount,
         expenseDesc: expenseDesc,
         expenseCate: expenseCate
-    })
-    .then(result=>{
-        res.json(result);
-    })
-    .catch(error=>{
-        console.log(error);
     });
+    res.json(result);
 }
 
 
-exports.EditExpense = (req, res, next)=>{
+exports.EditExpense = async (req, res, next)=>{
     const id = req.params.id;
     const updatedAmount = req.body.expenseAmount;
     const updatedDesc = req.body.expenseDesc;
     const updatedCate = req.body.expenseCate;
-    dataModel.findByPk(id).then(data=>{
-        data.expenseAmount = updatedAmount,
-        data.expenseDesc = updatedDesc,
-        data.expenseCate = updatedCate
-
-        return data.save();
-    }).then(result=>{
-        res.json(result);
-    }).catch(error=>{
-        console.log(error);
-    });
+    const updatedResult  = await dataModel.update(
+        {
+            expenseAmount: updatedAmount,
+            expenseDesc : updatedDesc,
+            expenseCate : updatedCate
+        }, {
+            where:{id:id
+            }
+        }
+    );
+    res.json(updatedResult);
 }
 
-exports.deleteExpense = (req, res, next)=>{
+exports.deleteExpense = async (req, res, next)=>{
     const id = req.params.id;
-    console.l
-    dataModel.findByPk(id)
-    .then(expense=>{
-        return expense.destroy();
-    }).then(result=>{
-        res.json(result);
-    }).catch(error=>{
-        console.log(error);
-    });
+    const result = await dataModel.destroy({where:{id: id}});
+    res.json(result);
 }
