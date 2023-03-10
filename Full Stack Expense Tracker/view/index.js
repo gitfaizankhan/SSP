@@ -12,8 +12,10 @@ async function addExpense() {
         }
         if (id === '') {
             await axios.post('http://localhost:5000/expense/add-expense', expenseData);
+            getUserData();
         } else {
             await axios.post('http://localhost:5000/expense/update-expense/' + expenseData.id, expenseData);
+            getUserData();
         }
     } catch (error) {
         console.log(error);
