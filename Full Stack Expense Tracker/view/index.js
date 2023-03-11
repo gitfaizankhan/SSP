@@ -12,10 +12,8 @@ async function addExpense() {
         }
         if (id === '') {
             await axios.post('http://localhost:5000/expense/add-expense', expenseData);
-            getUserData();
         } else {
             await axios.post('http://localhost:5000/expense/update-expense/' + expenseData.id, expenseData);
-            getUserData();
         }
     } catch (error) {
         console.log(error);
@@ -39,16 +37,13 @@ async function getUserData() {
 function addDataTable(data) {
     let ul = document.getElementById("items");
     let li = document.createElement('li');
-    li.className = "list-group-item";
-
-    // create new text node using the createTextNode() method and appends it to the li element using the appendChild method.
+    
     li.appendChild(document.createTextNode(`Amount = ${data.expenseAmount}, Description = ${data.expenseDesc}, Category = ${data.expenseCate}`));
 
     //Edit button
     var editB = document.createElement('input');
     editB.type = 'button'
     editB.value = 'Edit'
-    editB.className = "form-control bg-primary"
     editB.addEventListener('click', (e) => {
         document.getElementById('id').value = data.id;
         document.getElementById('amount').value = data.expenseAmount;
@@ -62,7 +57,6 @@ function addDataTable(data) {
     var deleteB = document.createElement('input');
     deleteB.type = 'button'
     deleteB.value = 'Delete'
-    deleteB.className = "form-control bg-primary"
     deleteB.addEventListener('click', async (e) => {
         try {
             let deleteData = await axios.post('http://localhost:5000/expense/delete-expense/' + data.id);
