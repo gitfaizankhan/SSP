@@ -12,7 +12,8 @@ const dataModel = sequelize.define('expenseData', {
     expenseAmount: Sequelize.INTEGER,
     expenseDesc: Sequelize.STRING,
     expenseCate: Sequelize.STRING
-    }, {
+    },
+    {
         timestamps:false
     }
 );

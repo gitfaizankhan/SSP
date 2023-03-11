@@ -5,17 +5,17 @@ const expenseController = require('../controller/expenseController');
 const router = express.Router();
 
 
-// Get Expense http://localhost:5000/expense/get-expense
+// Get
 router.get('/get-expense', expenseController.getExpense);
 
 
-// Add Expense http://localhost:5000/expense/add-expense
+// Add
 router.post('/add-expense', expenseController.addExpense);
 
-// Edit Expense http://localhost:5000/expense/update-expense/:id
-router.post('/update-expense/:id', expenseController.EditExpense);
+// Edit
+router.put('/update-expense/:id', expenseController.EditExpense);
 
-// delete expense http://localhost:5000/expense/delete-expense/:id
-router.post('/delete-expense/:id', expenseController.deleteExpense);
+// Delete
+router.delete('/delete-expense/:id', expenseController.deleteExpense);
 
 module.exports = router;

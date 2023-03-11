@@ -13,15 +13,15 @@ async function addExpense() {
         if (id === '') {
             await axios.post('http://localhost:5000/expense/add-expense', expenseData);
         } else {
-            await axios.post('http://localhost:5000/expense/update-expense/' + expenseData.id, expenseData);
+            await axios.put('http://localhost:5000/expense/update-expense/' + expenseData.id, expenseData);
         }
     } catch (error) {
         console.log(error);
     }
 }
 
-getUserData();
-async function getUserData() {
+getExpenseData();
+async function getExpenseData() {
     try {
         let showUser = await axios.get('http://localhost:5000/expense/get-expense');
         for (let data of showUser.data) {
@@ -33,14 +33,15 @@ async function getUserData() {
 }
 
 
-
+// Add Data Table 
 function addDataTable(data) {
     let ul = document.getElementById("items");
     let li = document.createElement('li');
+    const space = document.createTextNode("\u00a0");
     
-    li.appendChild(document.createTextNode(`Amount = ${data.expenseAmount}, Description = ${data.expenseDesc}, Category = ${data.expenseCate}`));
+    li.appendChild(document.createTextNode(`Amount = ${data.expenseAmount} || Description = ${data.expenseDesc} || Category = ${data.expenseCate}`));
 
-    //Edit button
+    //Edit
     var editB = document.createElement('input');
     editB.type = 'button'
     editB.value = 'Edit'
@@ -49,22 +50,22 @@ function addDataTable(data) {
         document.getElementById('amount').value = data.expenseAmount;
         document.getElementById('discriptiton').value = data.expenseDesc;
         document.getElementById('category').value = data.expenseCate;
-        
         li.remove();
-    })
+    });
 
-    //delete button
+    //delete
     var deleteB = document.createElement('input');
     deleteB.type = 'button'
     deleteB.value = 'Delete'
     deleteB.addEventListener('click', async (e) => {
         try {
-            let deleteData = await axios.post('http://localhost:5000/expense/delete-expense/' + data.id);
+            await axios.delete('http://localhost:5000/expense/delete-expense/' + data.id);
             li.remove();
         } catch (error) {
             console.log(error);
         }
-    })
+    });
+    li.append(space);
     li.append(editB);
     li.append(deleteB);
     ul.append(li);
